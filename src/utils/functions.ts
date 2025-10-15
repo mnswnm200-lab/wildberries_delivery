@@ -155,10 +155,10 @@ function createWarehouseList(list: WarehouseList): DataForSheet {
     return list_wb;
 }
 
-function sleep(millis: number) {
+function sleep(cek: number) {
     var t = (new Date()).getTime();
     var i = 0;
-    while (((new Date()).getTime() - t) < millis * 1000) {
+    while (((new Date()).getTime() - t) < cek * 1000) {
         i++;
     }
 }
