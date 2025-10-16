@@ -85,6 +85,7 @@ async function loadData(): Promise<void> {
         method: "GET",
         headers: {
             "Authorization": env.API_KEY,
+            "Connection": "close",
         },
         signal: AbortSignal.timeout(5000),
     }).then(async (response: Response) => {
@@ -109,6 +110,7 @@ async function loadData(): Promise<void> {
 
         console.log(`${date.toISOString()} UPDATE_DATA_OK`);
     }).catch(async (err) => {
+        console.log("FETCH ERROR =>" + err);
         sleep(5);
         await loadData();
     });
