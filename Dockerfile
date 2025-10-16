@@ -5,6 +5,9 @@ WORKDIR /app
 
 COPY ./package*.json .
 COPY ./.env .
+RUN mkdir ./dist
+RUN mkdir ./dist/config
+COPY ./credentials.json /app/dist/config/
 RUN npm install --omit=dev
 
 #COPY dist/ /app/dist
