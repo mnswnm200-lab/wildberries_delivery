@@ -7,7 +7,7 @@ docker compose up
 Необходимые настройки:
 №1. В корневой директории проекта создать файл credentials.json с конфигурацией
 API для подключения к google-таблицам (простая аутентификация):
-
+```
 {
   "type": "service_account",
   "project_id": "wb-table-475107",
@@ -21,7 +21,7 @@ API для подключения к google-таблицам (простая а�
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wb-sevice%40wb-table-475107.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }
-
+```
 2. В файле ./.env прописать значения следующих переменных окружения:
 
 POSTGRES_PORT=5432 - порт для подлючения к БД
@@ -40,3 +40,4 @@ SPREADSHEETIDS="1c3j07Plf1gwg7HM1VhuzJI8nhZRvSrpitPoiOhz4ntc, 1AmbiywtKcwuOc0fNV
 4. Далее:
 
 bash> docker compose up
+
