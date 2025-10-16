@@ -47,7 +47,7 @@ interface ResponseWB {
 
 async function saveData(data: string[][]): Promise<void> {
     const auth = new google.auth.GoogleAuth({
-        keyFile: env.CREDENTIALS,
+        keyFile: "./dist/config/credentials.json",
         scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
 

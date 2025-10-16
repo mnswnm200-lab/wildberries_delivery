@@ -5,7 +5,7 @@
 docker compose up
 ```
 Необходимые настройки:
-1. В дирректории ./cofig создать файл credentials.json с конфигурацией
+1. В корневой директории проекта создать файл credentials.json с конфигурацией
 API для подключения к google-таблицам (простая аутентификация):
 
 {
@@ -31,7 +31,6 @@ POSTGRES_PASSWORD="postgres" - пароль для подключения к Б�
 
 APP_PORT=5000 - порт для контейнеров
 API_KEY="eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjUwNTIwdjEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTc2NTY3MDIyOSwiaWQiOiIwMTk3NmU0Yy1mZTgwLTc1NDAtODkyMi02NGE5ZWUzYTU4MzYiLCJpaWQiOjQ1OTExNjA5LCJvaWQiOjExMzA0NiwicyI6MTA3Mzc0MTgzMiwic2lkIjoiOTMyYzE3NmEtNTA4NS01YzZmLWJjMzMtNGU4NGNkZjU4ZDdlIiwidCI6ZmFsc2UsInVpZCI6NDU5MTE2MDl9.wDoH8FLdZu1049uPCmhx3UHaw28YJB-CylWeD2LgkpRZFIMlOsUlnlVmfmYKy__JWNjddDkOtdJ69QpSD5EKag" - ключ API для подключения к googe-таблицам
-CREDENTIALS="./src/config/credentials.json" - путь к файлу с настройками для API google-таблиц
 SPREADSHEETIDS="1c3j07Plf1gwg7HM1VhuzJI8nhZRvSrpitPoiOhz4ntc, 1AmbiywtKcwuOc0fNVl1l9cUtWMezOM2wwUgohdalKdo" - ID таблиц, прописываются в формате отной строки через запятую.
 
 3. Также необходимо в таблицах предварительно заполнить шапку в полях A1:L1 следующего содержания:

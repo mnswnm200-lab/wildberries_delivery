@@ -5,7 +5,6 @@ dotenv.config();
 const envSchema = z.object({
     API_KEY: z.string(),
     SPREADSHEETIDS: z.string().transform((value) => value.split(',')).pipe(z.string().trim().array()),
-    CREDENTIALS: z.string(),
     NODE_ENV: z.union([z.undefined(), z.enum(["development", "production"])]),
     POSTGRES_HOST: z.union([z.undefined(), z.string()]),
     POSTGRES_PORT: z
@@ -20,7 +19,6 @@ const envSchema = z.object({
 const env = envSchema.parse({
     API_KEY: process.env.API_KEY,
     SPREADSHEETIDS: process.env.SPREADSHEETIDS,
-    CREDENTIALS: process.env.CREDENTIALS,
     POSTGRES_HOST: process.env.POSTGRES_HOST,
     POSTGRES_PORT: process.env.POSTGRES_PORT,
     POSTGRES_DB: process.env.POSTGRES_DB,
