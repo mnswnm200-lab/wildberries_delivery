@@ -3,7 +3,7 @@
 ### Запуск приложения.
 Запуск приложения осуществляется одной командой из корневой дирректории проекта:
 ```bash
-docker compose up
+# docker compose up
 ```
 ### Необходимые настройки:
 1. В корневой директории проекта создать файл credentials.json с конфигурацией
@@ -40,8 +40,9 @@ SPREADSHEETIDS="1c3j07Plf1gwg7HM1VhuzJI8nhZRvSrpitPoiOhz4ntc, 1AmbiywtKcwuOc0fNV
 ```
 4. Далее:
 ```
-bash> docker compose up
+# docker compose up
 ```
+
 
 
 
