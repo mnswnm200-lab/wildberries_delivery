@@ -2,20 +2,6 @@ import { google } from "googleapis";
 import env from "#config/env/env.js";
 import knex from "#postgres/knex.js";
 
-interface DataForSheet {
-    geoName: string;
-    warehouseName: string;
-    boxStorageBase: string;
-    boxStorageCoefExpr: number;
-    boxStorageLiter: string;
-    boxDeliveryBase: string;
-    boxDeliveryCoefExpr: string;
-    boxDeliveryLiter: string;
-    boxDeliveryMarketplaceBase: string;
-    boxDeliveryMarketplaceCoefExpr: string;
-    boxDeliveryMarketplaceLiter: string;
-}
-
 interface WarehouseList {
     geoName: string;
     warehouseName: string;
@@ -28,6 +14,10 @@ interface WarehouseList {
     boxDeliveryMarketplaceBase: string;
     boxDeliveryMarketplaceCoefExpr: string;
     boxDeliveryMarketplaceLiter: string;
+}
+
+interface DataForSheet extends Omit<WarehouseList, "boxStorageCoefExpr"> {
+    boxStorageCoefExpr: number;
 }
 
 interface SelectDB extends WarehouseList {
@@ -59,14 +49,14 @@ async function saveData(data: string[][]): Promise<void> {
         await googleSheets.spreadsheets.values.clear({
             auth,
             spreadsheetId,
-            range: "stocks_coefs!A2:L2",
+            range: "stocks_coefs!A2:L82",
             },
         );
 
-        await googleSheets.spreadsheets.values.append({
+        await googleSheets.spreadsheets.values.update({
             auth,
             spreadsheetId,
-            range: "stocks_coefs!A2:L2",
+            range: "stocks_coefs!A2:L82",
             valueInputOption: "USER_ENTERED",
             requestBody: {
             values: data,
@@ -78,6 +68,7 @@ async function saveData(data: string[][]): Promise<void> {
 async function loadData(): Promise<void> {
     const pathApi: string = "https://common-api.wildberries.ru/api/v1/tariffs/box";
     const date: Date = new Date();
+    date.setHours(date.getHours() + 3);
     const current_date: string = date.toISOString().slice(0,10);
     const params: string = `date=${current_date}`;
     
@@ -110,7 +101,7 @@ async function loadData(): Promise<void> {
 
         console.log(`${date.toISOString()} UPDATE_DATA_OK`);
     }).catch(async (err) => {
-        console.log("FETCH ERROR =>" + err);
+        console.log(date.toISOString() + "FETCH ERROR =>" + err);
         sleep(5);
         await loadData();
     });
@@ -118,6 +109,7 @@ async function loadData(): Promise<void> {
 
 function createSaveData(select_res: SelectDB[], current_date: string): string[][] {
     let saveDataSheets: string[][] = [];
+
     
     for (const res of select_res) {
         let saveDataSheet: string[] = [
@@ -168,6 +160,6 @@ function sleep(cek: number) {
 export async function startWB() {
     for (;;) {
         await loadData();
-        sleep(60 * 60);
+        sleep(60);
     }
 }
