@@ -160,6 +160,6 @@ function sleep(cek: number) {
 export async function startWB() {
     for (;;) {
         await loadData();
-        sleep(60);
+        sleep(60 * 60);
     }
 }
